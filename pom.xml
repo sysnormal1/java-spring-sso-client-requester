@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.sysnormal.libs.security.sso.spring</groupId>
+	<artifactId>client-requester</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>client-requester</name>
+    <description>Spring Boot Auto-Configuration library for Single Sign-On (SSO) client requester</description>
+    <url>https://github.com/aalencarvz1/sso-starter</url>
+
+    <organization>
+        <name>SYSNORMAL</name>
+        <url>https://github.com/aalencarvz1/sso-starter</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/aalencarvz1/sso-starter</url>
+        <connection>scm:git:git://github.com/aalencarvz1/sso-starter.git</connection>
+        <developerConnection>scm:git:ssh://github.com/aalencarvz1/sso-starter.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <developers>
+        <developer>
+            <id>aalencarvz1</id>
+            <name>Alencar Velozo</name>
+            <email>aalencarvz@gmail.com</email>
+            <organization>SYSNORMAL</organization>
+            <organizationUrl>https://github.com/aalencarvz1</organizationUrl>
+        </developer>
+    </developers>
+
+    <properties>
+        <java.version>21</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.github.aalencarvz1.libs.commons</groupId>
+            <artifactId>default-data-swap</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.aalencarvz1.libs.commons</groupId>
+            <artifactId>utils</artifactId>
+            <version>4.1.0-SNAPSHOT</version>
+        </dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-toolchains-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>toolchain</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <toolchains>
+                        <jdk>21</jdk>
+                    </toolchains>
+                </configuration>
+            </plugin>
+		</plugins>
+	</build>
+
+</project>
