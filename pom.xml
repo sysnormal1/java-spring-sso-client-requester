@@ -6,7 +6,7 @@
 	<!--<groupId>com.sysnormal.security.auth.sso</groupId>-->
     <groupId>io.github.sysnormal1.security.auth.sso</groupId>
 	<artifactId>sso-client-requester</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.5-SNAPSHOT</version>
 	<name>sso-client-requester</name>
     <description>Spring Boot Auto-Configuration library for Single Sign-On (SSO) client requester</description>
     <url>https://github.com/sysnormal1/sso-client-requester</url>
@@ -51,7 +51,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>4.0.5</version>
+                <version>4.1.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -90,22 +90,22 @@
         <dependency>
             <groupId>io.github.sysnormal1.commons.core</groupId>
             <artifactId>default-data-swap-core</artifactId>
-            <version>0.0.4</version>
+            <version>0.0.5-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>io.github.sysnormal1.commons.core</groupId>
             <artifactId>utils-core</artifactId>
-            <version>0.0.4</version>
+            <version>0.0.5-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>io.github.sysnormal1.commons.spring</groupId>
             <artifactId>spring-web-utils</artifactId>
-            <version>0.0.4</version>
+            <version>0.0.5-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>io.github.sysnormal1.security.core</groupId>
             <artifactId>security-core</artifactId>
-            <version>0.0.4</version>
+            <version>0.0.5-SNAPSHOT</version>
         </dependency>
 	</dependencies>
 
@@ -162,7 +162,7 @@
             <plugin>
                 <groupId>org.sonatype.central</groupId>
                 <artifactId>central-publishing-maven-plugin</artifactId>
-                <version>0.10.0</version>
+                <version>0.11.0</version>
                 <extensions>true</extensions>
                 <configuration>
                     <publishingServerId>central-releases</publishingServerId>
