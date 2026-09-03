@@ -63,7 +63,7 @@ public class SsoClientRequesterService {
             String refreshToken,
             String agentIdentifier,
             String agentPassword,
-            Long systemId
+            Long domainId
     ) {
         logger.debug("INIT {}.{}",this.getClass().getSimpleName(), "refreshToken");
         DefaultDataSwap result = new DefaultDataSwap();
@@ -73,10 +73,10 @@ public class SsoClientRequesterService {
                 if (expirationIn != null && expirationIn * 1000 > System.currentTimeMillis()) {
                     result = refreshTokenOnSso(refreshToken);
                 } else {
-                    result = loginOnSso(agentIdentifier, agentPassword, systemId);
+                    result = loginOnSso(agentIdentifier, agentPassword, domainId);
                 }
             } else {
-                result = loginOnSso(agentIdentifier, agentPassword, systemId);
+                result = loginOnSso(agentIdentifier, agentPassword, domainId);
             }
         } catch (Exception e) {
             result.setException(e);
@@ -87,7 +87,7 @@ public class SsoClientRequesterService {
 
 
 
-    public String getToken(String email, String password, Long systemId) throws Exception {
+    public String getToken(String email, String password, Long domainId) throws Exception {
         logger.debug("INIT {}.{}",this.getClass().getSimpleName(), "getToken");
         logger.debug("current token {}, expires in {}, remaining seconds {}", lastToken, lastTokenExpirationInstant, lastTokenExpirationInstant != null ? Duration.between(Instant.now(), lastTokenExpirationInstant).getSeconds() : 0);
         logger.debug("current refreshToken {}, expires in {}, remaining seconds {}", lastRefreshToken, lastRefreshTokenExpirationInstant, lastRefreshTokenExpirationInstant != null ? Duration.between(Instant.now(), lastRefreshTokenExpirationInstant).getSeconds() : 0);
@@ -97,7 +97,7 @@ public class SsoClientRequesterService {
             result = lastToken;
         } else if (StringUtils.hasText(lastRefreshToken) && lastRefreshTokenExpirationInstant != null && Instant.now().isBefore(lastRefreshTokenExpirationInstant.minusSeconds(30))) {
             logger.debug("using corrent refresh token");
-            DefaultDataSwap loginResponse = refreshToken(lastRefreshToken, email, password, systemId);
+            DefaultDataSwap loginResponse = refreshToken(lastRefreshToken, email, password, domainId);
             if (loginResponse.success) {
                 result = lastToken;
             } else {
@@ -105,7 +105,7 @@ public class SsoClientRequesterService {
             }
         } else {
             logger.debug("using new login");
-            DefaultDataSwap loginResponse = loginOnSso(email, password, systemId);
+            DefaultDataSwap loginResponse = loginOnSso(email, password, domainId);
             if (loginResponse.success) {
                 result = lastToken;
             } else {
@@ -166,11 +166,11 @@ public class SsoClientRequesterService {
         logger.debug("END {}.{}",this.getClass().getSimpleName(), "handleLoginResult");
     }
 
-    public DefaultDataSwap loginOnSso(String email, String password, Long systemId) {
+    public DefaultDataSwap loginOnSso(String email, String password, Long domainId) {
         logger.debug("INIT {}.{}",this.getClass().getSimpleName(), "loginOnSso");
         DefaultDataSwap result = new DefaultDataSwap();
         try {
-            String bodyValue = "{" + (systemId != null ? "\"systemId\":"+systemId+"," : "") + "\"email\":\"" + email + "\",\"password\":\"" + password + "\"}";
+            String bodyValue = "{" + (domainId != null ? "\"domainId\":"+domainId+"," : "") + "\"email\":\"" + email + "\",\"password\":\"" + password + "\"}";
             logger.debug("bodyValue {}", bodyValue);
             ClientRawResponseWrapper response = ssoWebClient.post()
                     .uri(this.ssoProperties.getLoginEndpoint())
@@ -197,8 +197,8 @@ public class SsoClientRequesterService {
     public DefaultDataSwap loginOnSso(String email, String password) {
         return loginOnSso(email, password, null);
     }
-    public DefaultDataSwap loginOnSso(Long systemId) {
-        return loginOnSso(this.ssoProperties.getDefaultEmail(), this.ssoProperties.getDefaultPassword(), systemId);
+    public DefaultDataSwap loginOnSso(Long domainId) {
+        return loginOnSso(this.ssoProperties.getDefaultEmail(), this.ssoProperties.getDefaultPassword(), domainId);
     }
 
     public DefaultDataSwap refreshTokenOnSso(String refreshToken) {

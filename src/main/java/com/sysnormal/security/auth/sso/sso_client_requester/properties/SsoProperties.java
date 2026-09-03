@@ -15,5 +15,5 @@ public class SsoProperties {
     private String refreshTokenEndpoint = "/auth/refresh_token";
     private String defaultEmail = "jumbo.ti@jumboalimentos.com.br";
     private String defaultPassword = "1#__ .*Racnela08__XY+ ##*0 -Z_";
-    private Long defaultSystemId = 1L;
+    private Long defaultDomainId = 1L;
 }
